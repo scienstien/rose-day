@@ -1,0 +1,447 @@
+/* ============================================
+   CSS Variables - Rose Day Color Palette
+   ============================================ */
+:root {
+    --color-bg-start: #fff5f7;
+    --color-bg-end: #ffe8ed;
+    --color-rose-deep: #d84860;
+    --color-rose-medium: #e8677d;
+    --color-rose-light: #f59bab;
+    --color-rose-pale: #fcc9d3;
+    --color-leaf: #5a8f6b;
+    --color-stem: #6b9e7f;
+    --color-text-primary: #3d2e2e;
+    --color-text-muted: #7a6565;
+    --color-white: #ffffff;
+    --shadow-card: 0 10px 40px rgba(216, 72, 96, 0.15);
+    --shadow-rose: 0 4px 20px rgba(216, 72, 96, 0.25);
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, var(--color-bg-start) 0%, var(--color-bg-end) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ============================================
+   Floating Background Petals
+   ============================================ */
+.petals-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.petal {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(ellipse at 30% 30%, var(--color-rose-light), var(--color-rose-medium));
+    border-radius: 50% 0 50% 0;
+    opacity: 0;
+    animation: drift-down 15s infinite ease-in-out;
+}
+
+.petal-1 { left: 8%; animation-delay: 0s; animation-duration: 16s; }
+.petal-2 { left: 18%; animation-delay: 2.5s; animation-duration: 14s; }
+.petal-3 { left: 32%; animation-delay: 1s; animation-duration: 18s; }
+.petal-4 { left: 48%; animation-delay: 4s; animation-duration: 15s; }
+.petal-5 { left: 62%; animation-delay: 0.5s; animation-duration: 17s; }
+.petal-6 { left: 75%; animation-delay: 3s; animation-duration: 16s; }
+.petal-7 { left: 85%; animation-delay: 1.5s; animation-duration: 14.5s; }
+.petal-8 { left: 92%; animation-delay: 5s; animation-duration: 15.5s; }
+
+@keyframes drift-down {
+    0% {
+        top: -8%;
+        opacity: 0;
+        transform: translateX(0) rotate(0deg);
+    }
+    10% { opacity: 0.7; }
+    85% { opacity: 0.5; }
+    100% {
+        top: 108%;
+        opacity: 0;
+        transform: translateX(80px) rotate(360deg);
+    }
+}
+
+/* ============================================
+   Container & Card
+   ============================================ */
+.container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 500px;
+}
+
+.card {
+    background: var(--color-white);
+    padding: 50px 40px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-card);
+    text-align: center;
+    animation: card-appear 1s ease-out;
+}
+
+@keyframes card-appear {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ============================================
+   CSS Rose Construction
+   ============================================ */
+.rose-wrapper {
+    position: relative;
+    width: 140px;
+    height: 180px;
+    margin: 0 auto 40px;
+    opacity: 0;
+    animation: rose-bloom 2s ease-out 0.3s forwards;
+}
+
+@keyframes rose-bloom {
+    0% {
+        opacity: 0;
+        transform: scale(0.6) rotate(-10deg);
+    }
+    60% {
+        transform: scale(1.05) rotate(2deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+.rose {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    filter: drop-shadow(var(--shadow-rose));
+}
+
+/* Petal Layers */
+.petal-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+/* Individual Rose Petals */
+.rose-petal {
+    position: absolute;
+    border-radius: 50% 50% 50% 0;
+    transform-origin: bottom right;
+}
+
+/* Outer Petals (largest) */
+.petal-outer {
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle at 30% 30%, var(--color-rose-light), var(--color-rose-medium));
+    top: 50%;
+    left: 50%;
+}
+
+.petal-outer-1 { transform: translate(-50%, -50%) rotate(0deg) translate(30px) rotate(-20deg); }
+.petal-outer-2 { transform: translate(-50%, -50%) rotate(72deg) translate(30px) rotate(-20deg); }
+.petal-outer-3 { transform: translate(-50%, -50%) rotate(144deg) translate(30px) rotate(-20deg); }
+.petal-outer-4 { transform: translate(-50%, -50%) rotate(216deg) translate(30px) rotate(-20deg); }
+.petal-outer-5 { transform: translate(-50%, -50%) rotate(288deg) translate(30px) rotate(-20deg); }
+
+/* Middle Petals */
+.petal-middle {
+    width: 38px;
+    height: 38px;
+    background: radial-gradient(circle at 30% 30%, var(--color-rose-medium), var(--color-rose-deep));
+    top: 50%;
+    left: 50%;
+}
+
+.petal-middle-1 { transform: translate(-50%, -50%) rotate(36deg) translate(18px) rotate(-15deg); }
+.petal-middle-2 { transform: translate(-50%, -50%) rotate(126deg) translate(18px) rotate(-15deg); }
+.petal-middle-3 { transform: translate(-50%, -50%) rotate(216deg) translate(18px) rotate(-15deg); }
+.petal-middle-4 { transform: translate(-50%, -50%) rotate(306deg) translate(18px) rotate(-15deg); }
+
+/* Inner Petals (smallest) */
+.petal-inner {
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(circle at 30% 30%, var(--color-rose-deep), #c23d54);
+    top: 50%;
+    left: 50%;
+}
+
+.petal-inner-1 { transform: translate(-50%, -50%) rotate(0deg) translate(8px) rotate(-10deg); }
+.petal-inner-2 { transform: translate(-50%, -50%) rotate(120deg) translate(8px) rotate(-10deg); }
+.petal-inner-3 { transform: translate(-50%, -50%) rotate(240deg) translate(8px) rotate(-10deg); }
+
+/* Rose Center */
+.rose-center {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: radial-gradient(circle, #a83345, var(--color-rose-deep));
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Stem */
+.stem {
+    position: absolute;
+    width: 4px;
+    height: 80px;
+    background: linear-gradient(to bottom, var(--color-stem) 0%, #4a7258 100%);
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+/* Leaves */
+.leaf {
+    position: absolute;
+    width: 28px;
+    height: 18px;
+    background: radial-gradient(ellipse at 30% 30%, #6db080, var(--color-leaf));
+    border-radius: 0 50% 50% 50%;
+    bottom: 35px;
+}
+
+.leaf-left {
+    left: 28%;
+    transform: rotate(-30deg);
+}
+
+.leaf-right {
+    right: 28%;
+    transform: rotate(30deg) scaleX(-1);
+}
+
+/* Gentle breathing animation for the rose */
+.rose {
+    animation: rose-breathe 4s ease-in-out 2.3s infinite;
+}
+
+@keyframes rose-breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+
+/* ============================================
+   Typography & Content
+   ============================================ */
+.content {
+    opacity: 0;
+    animation: content-fade-in 1s ease-out 0.6s forwards;
+}
+
+@keyframes content-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.headline {
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+    animation: headline-slide 1s ease-out 0.8s backwards;
+}
+
+@keyframes headline-slide {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.main-message {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: 16px;
+    animation: text-fade 1s ease-out 1s backwards;
+}
+
+.secondary-message {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    font-style: italic;
+    margin-bottom: 32px;
+    animation: text-fade 1s ease-out 1.2s backwards;
+}
+
+@keyframes text-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Divider */
+.divider {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        var(--color-rose-medium) 50%, 
+        transparent 100%);
+    margin: 0 auto 28px;
+    opacity: 0;
+    animation: divider-grow 0.8s ease-out 1.4s forwards;
+}
+
+@keyframes divider-grow {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 80px;
+        opacity: 1;
+    }
+}
+
+/* Footer */
+.footer {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.03em;
+    opacity: 0;
+    animation: text-fade 1s ease-out 1.6s forwards;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+@media (max-width: 600px) {
+    .card {
+        padding: 40px 30px;
+    }
+    
+    .headline {
+        font-size: 30px;
+    }
+    
+    .main-message {
+        font-size: 16px;
+    }
+    
+    .secondary-message {
+        font-size: 14px;
+    }
+    
+    .rose-wrapper {
+        width: 120px;
+        height: 160px;
+        margin-bottom: 32px;
+    }
+    
+    .rose {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .petal-outer {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .petal-outer-1 { transform: translate(-50%, -50%) rotate(0deg) translate(24px) rotate(-20deg); }
+    .petal-outer-2 { transform: translate(-50%, -50%) rotate(72deg) translate(24px) rotate(-20deg); }
+    .petal-outer-3 { transform: translate(-50%, -50%) rotate(144deg) translate(24px) rotate(-20deg); }
+    .petal-outer-4 { transform: translate(-50%, -50%) rotate(216deg) translate(24px) rotate(-20deg); }
+    .petal-outer-5 { transform: translate(-50%, -50%) rotate(288deg) translate(24px) rotate(-20deg); }
+    
+    .petal-middle {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .petal-middle-1 { transform: translate(-50%, -50%) rotate(36deg) translate(14px) rotate(-15deg); }
+    .petal-middle-2 { transform: translate(-50%, -50%) rotate(126deg) translate(14px) rotate(-15deg); }
+    .petal-middle-3 { transform: translate(-50%, -50%) rotate(216deg) translate(14px) rotate(-15deg); }
+    .petal-middle-4 { transform: translate(-50%, -50%) rotate(306deg) translate(14px) rotate(-15deg); }
+    
+    .petal-inner {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .stem {
+        height: 70px;
+    }
+    
+    .leaf {
+        width: 24px;
+        height: 15px;
+    }
+}
+
+@media (max-width: 400px) {
+    .card {
+        padding: 32px 24px;
+    }
+    
+    .headline {
+        font-size: 26px;
+    }
+}
+
+/* ============================================
+   Accessibility - Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
